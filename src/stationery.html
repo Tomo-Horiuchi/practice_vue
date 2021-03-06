@@ -13,6 +13,13 @@
         <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
         <p>小計: {{ totalPrice | numberWithDelimiter }}円</p>
         <p>合計(税込): {{ totalPriceWithTax | numberWithDelimiter }}円</p>
+        <!-- 属性値に応じて、表示を出し分けする -->
+        <!-- ディレクティブ　独自のHTMLの属性を追加 -->
+        <!-- v-show は結果よって表示非表示を切り替える　-->
+        <!-- v-show よく変わる時使用　v-if 初期表示時に使用　-->
+        <p v-show="!canBuy">
+            　{{ 1000 | numberWithDelimiter }}円以上からご購入いただけます
+        </p>
     </div>
     <script>
         // ロードされ、Vueがグローバル変数として定義されているか確認
@@ -48,6 +55,9 @@
                 totalPriceWithTax: function () {
                     // 算出プロパティに依存した算出プロパティも定義できる
                     return Math.floor(this.totalPrice * 1.08)
+                },
+                canBuy: function () {
+                    return this.totalPrice >= 1000 // 1000円以上から購入可能にする
                 }
             }
         });
