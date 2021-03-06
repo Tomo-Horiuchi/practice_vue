@@ -3,10 +3,15 @@
   <fruits-list-title></fruits-list-title>
 </div>
 
+<script type="text/x-template" id="fruits-list-title">
+  <h1>フルーツ一覧</h1>
+</script>
+
 <script>
 Vue.component('fruits-list-title', {
-  template: '<h1>フルーツ一覧</h1>'
+  template: '#fruits-list-title'
 })
+
 new Vue({
   el: '#fruits-list'
 })
