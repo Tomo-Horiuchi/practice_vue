@@ -10,9 +10,8 @@
 
 <body>
     <div id="app">
-        <p>
-            {{ items[0].name }}
-        </p>
+        <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
+        <p>フィルター処理例 {{1000 | numberWithDelimiter}}</p>
     </div>
     <script>
         // ロードされ、Vueがグローバル変数として定義されているか確認
@@ -30,6 +29,14 @@
             el: '#app',
             data: { // dataプロパティ
                 items: items
+            },
+            filters: { // この節で追加したフィルタの定義
+                numberWithDelimiter: function (value) {
+                    if (!value) {
+                        return '0'
+                    }
+                    return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+                }
             }
         });
     </script>
